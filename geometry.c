@@ -7,10 +7,10 @@
 int main()
 {
     char object[100];
-    char x[20], y[20];
+    char x[20], y[20], radius[20];
     char circle[] = "circle";
     int i, index;
-    double x_num, y_num;
+    double x_num, y_num, radius_num;
 
     fgets(object, sizeof(object), stdin);
 
@@ -50,8 +50,21 @@ int main()
             }
         }
 
-        printf("%f %f ", x_num, y_num);
-        printf("%d", strlen(object));
+        for (int j = 0; object[i] != ')'; j++) {
+            for (i = i + 2; object[i] != ')'; i++, j++) {
+                radius[j] = object[i];
+            }
+            index = j;
+        }
+        radius_num = atof(radius);
+        for (int j = 0; j < index; j++) {
+            if (isalpha(radius[j]) != 0) {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 1;
+            }
+        }
+
+        printf("%f %f %f", x_num, y_num, radius_num);
 
     }
 
