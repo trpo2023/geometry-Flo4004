@@ -6,11 +6,12 @@
 
 int main()
 {
-    char object[20];
+    char object[100];
     char x[20], y[20];
     char circle[] = "circle";
-    int i;
+    int i, index;
     double x_num, y_num;
+
     fgets(object, sizeof(object), stdin);
 
     if (object[0] == 'c') {
@@ -25,25 +26,33 @@ int main()
             for (i = i + 1; object[i] != ' '; i++, j++) {
                 x[j] = object[i];
             }
+            index = j;
         }
         x_num = atof(x);
-        if (isdigit(x_num) == 0) {
-            printf("Error at collum %d: expected '<double>'\n", i);
-            exit;
+        for (int j = 0; j < index; j++) {
+            if (isalpha(x[j]) != 0) {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 1;
+            }
         }
 
         for (int j = 0; object[i] != ','; j++) {
             for (i = i + 1; object[i] != ','; i++, j++) {
                 y[j] = object[i];
             }
+            index = j;
         }
         y_num = atof(y);
-        if (isdigit(y_num) != 0) {
-            printf("Error at collum %d: expected '<double>'\n", i + 1);
-            exit;
+        for (int j = 0; j < index; j++) {
+            if (isalpha(y[j]) != 0) {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 1;
+            }
         }
 
-        printf("%f %f", x_num, y_num);
+        printf("%f %f ", x_num, y_num);
+        printf("%d", strlen(object));
+
     }
 
     else {
