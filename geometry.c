@@ -1,6 +1,8 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define pi 3.14159265358979323846
 
 int main()
 {
@@ -14,7 +16,7 @@ int main()
     if (object[0] == 'c') {
         for (i = 0; object[i] != '('; i++) {
             if (object[i] != circle[i]) {
-                printf("Error at column %d: expected 'circle'\n", i + 1);
+                printf("Error at column %d: expected 'circle'\n", i);
                 break;
             }
         }
@@ -25,6 +27,10 @@ int main()
             }
         }
         x_num = atof(x);
+        if (isdigit(x_num) == 0) {
+            printf("Error at collum %d: expected '<double>'\n", i);
+            exit;
+        }
 
         for (int j = 0; object[i] != ','; j++) {
             for (i = i + 1; object[i] != ','; i++, j++) {
@@ -32,7 +38,12 @@ int main()
             }
         }
         y_num = atof(y);
+        if (isdigit(y_num) != 0) {
+            printf("Error at collum %d: expected '<double>'\n", i + 1);
+            exit;
+        }
 
+        printf("%f %f", x_num, y_num);
     }
 
     else {
