@@ -109,6 +109,7 @@ int main()
         if (bracket_close_last - object + 2 != strlen(object)) {
             printf("Error at column %ld: unexpected token",
                    bracket_close_last - object + 1);
+            return 4;
         }
 
     }
@@ -116,5 +117,6 @@ int main()
     else {
         printf("\nError at column 0: expected 'circle', 'triangle' or "
                "'polygon'");
+        return 5;
     }
 }
