@@ -8,6 +8,7 @@
 int main()
 {
     char object[50];
+    char input[50];
     char x[20], y[20], radius[20];
     char circle[] = "circle";
     int i, index;
@@ -16,8 +17,16 @@ int main()
     int bracket_open = 0, bracket_close = 0;
     int error_bracket_open = 0, error_bracket_close = 0;
 
-    fgets(object, sizeof(object), stdin);
+    fgets(input, sizeof(input), stdin);
 
+    // working with string
+    for (int j = 0; j < strlen(input); j++) {
+        input[j] = tolower(input[j]);
+    }
+
+    printf("%s\n%s", input, object);
+
+    // start of the treatment errors
     if (object[0] == 'c') {
         for (int j = 0; j < strlen(object); j++) {
             if (object[j] == '(') {
