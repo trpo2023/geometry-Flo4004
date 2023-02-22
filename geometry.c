@@ -42,7 +42,7 @@ int main()
         for (i = 0; object[i] != '('; i++) {
             if (object[i] != circle[i]) {
                 printf("Error at column %d: expected 'circle'\n", i);
-                break;
+                return 2;
             }
         }
 
@@ -56,7 +56,7 @@ int main()
         for (int j = 0; j < index; j++) {
             if (isalpha(x[j]) != 0) {
                 printf("Error at collum %d: expected '<double>'\n", i);
-                return 1;
+                return 3;
             }
         }
 
@@ -70,7 +70,7 @@ int main()
         for (int j = 0; j < index; j++) {
             if (isalpha(y[j]) != 0) {
                 printf("Error at collum %d: expected '<double>'\n", i);
-                return 1;
+                return 3;
             }
         }
 
@@ -84,9 +84,17 @@ int main()
         for (int j = 0; j < index; j++) {
             if (isalpha(radius[j]) != 0) {
                 printf("Error at collum %d: expected '<double>'\n", i);
-                return 1;
+                return 3;
             }
         }
+
+        char* bracket_close_last;
+        bracket_close_last = strrchr(object, ')');
+        if (bracket_close_last - object + 2 != strlen(object)) {
+            printf("Error at column %ld: unexpected token",
+                   bracket_close_last - object + 1);
+        }
+
     }
 
     else {
