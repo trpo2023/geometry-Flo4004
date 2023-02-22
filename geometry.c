@@ -2,19 +2,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <strings.h>
 #define pi 3.14159265358979323846
 
 int main()
 {
-    char object[100];
+    char object[50];
     char x[20], y[20], radius[20];
     char circle[] = "circle";
     int i, index;
     double x_num, y_num, radius_num;
 
+    int bracket_open = 0, bracket_close = 0;
+    int error_bracket_open = 0, error_bracket_close = 0;
+
     fgets(object, sizeof(object), stdin);
 
     if (object[0] == 'c') {
+        for (int j = 0; j < strlen(object); j++) {
+            if (object[j] == '(') {
+                bracket_open++;
+                error_bracket_open = j;
+            }
+
+            if (object[j] == ')') {
+                bracket_close++;
+                error_bracket_close = j;
+            }
+        }
+        if (bracket_open != 1) {
+            printf("Error at column %d: expected ')'", error_bracket_open);
+            return 1;
+        }
+        if (bracket_close != 1) {
+            printf("Error at column %d: expected '('", error_bracket_close);
+            return 1;
+        }
+
         for (i = 0; object[i] != '('; i++) {
             if (object[i] != circle[i]) {
                 printf("Error at column %d: expected 'circle'\n", i);
@@ -63,9 +87,6 @@ int main()
                 return 1;
             }
         }
-
-        printf("%f %f %f", x_num, y_num, radius_num);
-
     }
 
     else {
