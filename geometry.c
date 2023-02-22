@@ -5,16 +5,6 @@
 #include <strings.h>
 #define pi 3.14159265358979323846
 
-int strlength(char* s)
-{
-    int c = 0;
-    while (*s != '\0') {
-        c++;
-        s++;
-    }
-    return c;
-}
-
 int main()
 {
     char object[50];
