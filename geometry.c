@@ -24,7 +24,14 @@ int main()
         input[j] = tolower(input[j]);
     }
 
-    printf("%s\n%s", input, object);
+    for (int j = 0, m = 0; j < strlen(input); j++) {
+        if ((input[j]) == ' ' && (input[j + 1] == ' '))
+            continue;
+        else {
+            object[m] = input[j];
+            m++;
+        }
+    }
 
     // start of the treatment errors
     if (object[0] == 'c') {
