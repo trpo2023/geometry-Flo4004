@@ -84,8 +84,20 @@ int main()
             index = j;
         }
         x_num = atof(x);
-        for (int j = 0; j < index; j++) {
+        for (int j = 0, point = 0, minus = 0; j < index; j++) {
+            if (x[0] == '.') {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 3;
+            }
+            if (x[j] == '.')
+                point++;
+            if (x[j] == '-')
+                minus++;
             if (isalpha(x[j]) != 0) {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 3;
+            }
+            if (point > 1 || minus > 1) {
                 printf("Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
@@ -98,8 +110,20 @@ int main()
             index = j;
         }
         y_num = atof(y);
-        for (int j = 0; j < index; j++) {
+        for (int j = 0, point = 0, minus = 0; j < index; j++) {
+            if (y[0] == '.') {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 3;
+            }
+            if (y[j] == '.')
+                point++;
+            if (y[j] == '-')
+                minus++;
             if (isalpha(y[j]) != 0) {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 3;
+            }
+            if (point > 1 || minus > 1) {
                 printf("Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
@@ -112,8 +136,20 @@ int main()
             index = j;
         }
         radius_num = atof(radius);
-        for (int j = 0; j < index; j++) {
+        for (int j = 0, point = 0, minus = 0; j < index; j++) {
+            if (radius[0] == '.') {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 3;
+            }
+            if (radius[j] == '.')
+                point++;
+            if (radius[j] == '-')
+                minus++;
             if (isalpha(radius[j]) != 0) {
+                printf("Error at collum %d: expected '<double>'\n", i);
+                return 3;
+            }
+            if (point > 1 || minus > 1) {
                 printf("Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
@@ -124,7 +160,7 @@ int main()
             return 4;
         }
 
-        // printf("x = %f\ny = %f\nradius = %f\n", x_num, y_num, radius_num);
+        printf("x = %f\ny = %f\nradius = %f\n", x_num, y_num, radius_num);
     }
 
     else {
