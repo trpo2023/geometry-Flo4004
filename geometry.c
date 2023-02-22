@@ -5,6 +5,16 @@
 #include <strings.h>
 #define pi 3.14159265358979323846
 
+int strlength(char* s)
+{
+    int c = 0;
+    while (*s != '\0') {
+        c++;
+        s++;
+    }
+    return c;
+}
+
 int main()
 {
     char object[50];
@@ -16,6 +26,11 @@ int main()
 
     int bracket_open = 0, bracket_close = 0;
     int error_bracket_open = 0, error_bracket_close = 0;
+
+    for (int i = 0; i < 50; i++) {
+        object[i] = '\0';
+        input[i] = '\0';
+    }
 
     fgets(input, sizeof(input), stdin);
 
@@ -104,14 +119,12 @@ int main()
             }
         }
 
-        char* bracket_close_last;
-        bracket_close_last = strrchr(object, ')');
-        if (bracket_close_last - object + 2 != strlen(object)) {
-            printf("Error at column %ld: unexpected token",
-                   bracket_close_last - object + 1);
+        if (i + 1 != strlen(object) - 1) {
+            printf("Error at column %d: unexpected token", i);
             return 4;
         }
 
+        // printf("x = %f\ny = %f\nradius = %f\n", x_num, y_num, radius_num);
     }
 
     else {
