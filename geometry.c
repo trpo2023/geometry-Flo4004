@@ -14,7 +14,7 @@ int main()
     int i, index;
     double x_num, y_num, radius_num;
 
-    int bracket_open = 0, bracket_close = 0;
+    int bracket_open = 0, bracket_close = 0, point_one = 0;
     int error_bracket_open = 0, error_bracket_close = 0;
 
     for (int i = 0; i < 50; i++) {
@@ -50,6 +50,10 @@ int main()
                 bracket_close++;
                 error_bracket_close = j;
             }
+
+            if (object[j] == ',') {
+                point_one++;
+            }
         }
         if (bracket_open != 1) {
             printf("Error at column %d: expected ')'", error_bracket_open);
@@ -58,6 +62,10 @@ int main()
         if (bracket_close != 1) {
             printf("Error at column %d: expected '('", error_bracket_close);
             return 1;
+        }
+        if (point_one != 1) {
+            printf("Error: expected 'circle(x y, r)'\n");
+            return 5;
         }
 
         for (i = 0; object[i] != '('; i++) {
@@ -68,6 +76,10 @@ int main()
         }
 
         for (int j = 0; object[i] != ' '; j++) {
+            if (object[i] == ')') {
+                printf("Error: expected 'circle(x y, r)'\n");
+                return 5;
+            }
             for (i = i + 1; object[i] != ' '; i++, j++) {
                 x[j] = object[i];
             }
@@ -76,7 +88,7 @@ int main()
         x_num = atof(x);
         for (int j = 0, point = 0, minus = 0; j < index; j++) {
             if (x[0] == '.') {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("1Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
             if (x[j] == '.')
@@ -84,16 +96,20 @@ int main()
             if (x[j] == '-')
                 minus++;
             if (isalpha(x[j]) != 0) {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("2Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
             if (point > 1 || minus > 1) {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("3Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
         }
 
         for (int j = 0; object[i] != ','; j++) {
+            if (object[i] == ')') {
+                printf("Error: expected 'circle(x y, r)'\n");
+                return 5;
+            }
             for (i = i + 1; object[i] != ','; i++, j++) {
                 y[j] = object[i];
             }
@@ -102,7 +118,7 @@ int main()
         y_num = atof(y);
         for (int j = 0, point = 0, minus = 0; j < index; j++) {
             if (y[0] == '.') {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("4Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
             if (y[j] == '.')
@@ -110,11 +126,11 @@ int main()
             if (y[j] == '-')
                 minus++;
             if (isalpha(y[j]) != 0) {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("5Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
             if (point > 1 || minus > 1) {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("6Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
         }
@@ -128,19 +144,21 @@ int main()
         radius_num = atof(radius);
         for (int j = 0, point = 0, minus = 0; j < index; j++) {
             if (radius[0] == '.') {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("7Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
             if (radius[j] == '.')
                 point++;
-            if (radius[j] == '-')
-                minus++;
+            if (radius[j] == '-') {
+                printf("8Error at collum %d: expected positive number\n", i);
+                return 3;
+            }
             if (isalpha(radius[j]) != 0) {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("9Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
             if (point > 1 || minus > 1) {
-                printf("Error at collum %d: expected '<double>'\n", i);
+                printf("10Error at collum %d: expected '<double>'\n", i);
                 return 3;
             }
         }
@@ -149,7 +167,7 @@ int main()
             printf("Error at column %d: unexpected token", i);
             return 4;
         }
-
+        printf("%s", object);
         printf("x = %f\ny = %f\nradius = %f\n", x_num, y_num, radius_num);
     }
 
