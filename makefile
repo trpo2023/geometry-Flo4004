@@ -1,2 +1,2 @@
-helloworld : helloworld.c
-	gcc -Wall -Werror -o helloworld helloworld.c
+geometry : geometry.c
+	gcc -Wall -Werror -o geometry geometry.c
